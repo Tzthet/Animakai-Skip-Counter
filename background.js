@@ -15,9 +15,13 @@ chrome.webNavigation.onDOMContentLoaded.addListener(function(details) {
 
 	    	if(
 	    		tabs[i].url.substring(0, 32) == "http://www.animakai.me/redir.php" || 
-	    		tabs[i].url.substring(0, 34) == "http://www.otakai.com.br/redir.php"
+	    		tabs[i].url.substring(0, 34) == "http://www.otakai.com.br/redir.php" ||
+	    		tabs[i].url.substring(0, 34) == "http://www.comicon.com.br/prot.php"
 	    		){
-				chrome.tabs.executeScript(tabs[i].id, { file: "execute.js" });
+				//chrome.tabs.executeScript(tabs[i].id, { file: "execute.js" });
+				var link = document.getElementById('link');
+				document.body.innerHTML = '<h1 style="text-align: center; margin-top: 200px">Aguarde, estamos redirecionando.</h1>';
+				window.location = link.href;
 			}
 
 			tabExecute.push(tabs[i].id);
