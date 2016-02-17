@@ -1,7 +1,7 @@
 {
   "name": "Animakai Skip Counter",
-  "description": "Pular a contagem de tempo para baixar animes na Animakai",
-  "version": "0.5",
+  "description": "Pular a contagem de tempo para baixar animes na Animakai.",
+  "version": "1.0",
   "permissions": [
     "activeTab",
     "webNavigation",

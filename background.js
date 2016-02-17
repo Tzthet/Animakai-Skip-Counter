@@ -4,24 +4,18 @@
 
 chrome.webNavigation.onDOMContentLoaded.addListener(function(details) {
 	chrome.tabs.getAllInWindow(null, function(tabs){
-		var tabExecute = [];
-		for (var i = 0; i < tabs.length; i++) {
+		var tabExecute = [],
+			tabsCount = tabs.length;
 
-	    	/*
-	    	// Se a aba ja não foi usada e se a url for diferente de chrome (para não tentar injetar o script em páginas do navegador)
-	    	if( !tabExecute[tabs[i].id] && tabs[i].url.substring(0, 6) != "chrome" ){
-	    		chrome.tabs.executeScript(tabs[i].id, { file: "execute.js" });
-	    	}*/
-
+		for (var i = tabsCount; i--;) {
 	    	if(
-	    		tabs[i].url.substring(0, 32) == "http://www.animakai.me/redir.php" || 
-	    		tabs[i].url.substring(0, 34) == "http://www.otakai.com.br/redir.php" ||
-	    		tabs[i].url.substring(0, 34) == "http://www.comicon.com.br/prot.php"
-	    		){
-				chrome.tabs.executeScript(tabs[i].id, { file: "execute.js" });
+	    		( tabs[i].url.indexOf('comicon') != -1 || tabs[i].url.indexOf('animakai') != -1 )  && 
+	    		( tabs[i].url.indexOf('/prot.php') != -1 || tabs[i].url.indexOf('/redir.php') != -1 ) &&
+	    		tabExecute.indexOf(tabs[i]) == -1
+	    	){
+				chrome.tabs.executeScript(tabs[i].id, { file: 'execute.js' });
+				tabExecute.push(tabs[i].id);
 			}
-
-			tabExecute.push(tabs[i].id);
 		}
 	});
 });
